@@ -83,6 +83,7 @@ __all__ = [
     'StrictFloat',
     'PaymentCardNumber',
     'ByteSize',
+    'Delete'
 ]
 
 NoneStr = Optional[str]
@@ -662,6 +663,12 @@ class SecretBytes:
 
     def get_secret_value(self) -> bytes:
         return self._secret_value
+
+
+class Delete:
+    @classmethod
+    def __get_validators__(cls) -> 'CallableGenerator':
+        yield from ()
 
 
 class PaymentCardBrand(str, Enum):

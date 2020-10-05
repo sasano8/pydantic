@@ -96,6 +96,7 @@ __all__ = [
     'StrictFloat',
     'PaymentCardNumber',
     'ByteSize',
+    'Delete',
     # version
     'VERSION',
 ]

@@ -5,7 +5,7 @@ from uuid import UUID, uuid4
 
 import pytest
 
-from pydantic import BaseModel, ConfigError, Extra, Field, NoneBytes, NoneStr, Required, ValidationError, constr
+from pydantic import BaseModel, ConfigError, Extra, Field, NoneBytes, NoneStr, Required, ValidationError, constr, Delete
 
 
 def test_success():
@@ -1242,3 +1242,21 @@ def test_base_config_type_hinting():
         a: int
 
     get_type_hints(M.__config__)
+
+
+def test_delete_field():
+    class M1(BaseModel):
+        a: str
+
+    class M2(M1):
+        a: Delete
+
+    class M3(M2):
+        a: str
+
+    m2 = M2(a='b')
+    assert not hasattr(m2, 'a')
+
+    m3 = M3(a='c')
+    assert m3.a == 'c'
+

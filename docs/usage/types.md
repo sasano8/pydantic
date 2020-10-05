@@ -738,6 +738,14 @@ raw bytes and print out human readable versions of the bytes as well.
 ```
 _(This script is complete, it should run "as is")_
 
+## Delete
+
+You can use the `Delete` if you want to ignore specific fields in the inherited model schema.
+
+```py
+{!.tmp_examples/types_delete.py!}
+```
+
 ## Custom Data Types
 
 You can also define your own custom data types. There are several ways to achieve it.

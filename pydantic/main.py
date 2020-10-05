@@ -32,7 +32,7 @@ from .fields import SHAPE_MAPPING, ModelField, Undefined
 from .json import custom_pydantic_encoder, pydantic_encoder
 from .parse import Protocol, load_file, load_str_bytes
 from .schema import model_schema
-from .types import PyObject, StrBytes
+from .types import PyObject, StrBytes, Delete
 from .typing import AnyCallable, ForwardRef, is_classvar, resolve_annotations, update_field_forward_refs
 from .utils import (
     ClassAttribute,
@@ -293,6 +293,7 @@ class ModelMetaclass(ABCMeta):
                     if not inferred.required:
                         fields_defaults[var_name] = inferred.default
 
+        fields = {k: v for k, v in fields.items() if v.type_ is not Delete}
         _custom_root_type = ROOT_KEY in fields
         if _custom_root_type:
             validate_custom_root_type(fields)
